@@ -1,0 +1,11 @@
+AllCops:
+  TargetRubyVersion: 3.1.0
+
+Layout/LineLength:
+  Max: 81
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact

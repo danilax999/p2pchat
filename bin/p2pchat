@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'p2pchat/client'
+require 'p2pchat/util'
+require 'optparse'
+
+args = {}
+opt_parser = OptionParser.new do |parser|
+  set_value = P2PChat::Util.set_value args
+
+  parser.banner = 'Usage: p2pchat [options]'
+
+  parser.on('-p', '--port PORT', 'Client listening port number.',
+            &set_value.call(:port, default: 3000, &:to_i))
+
+  parser.on('-l', '--message-len NUMBER', 'UDP incoming message maximum length.',
+            &set_value.call(:message_len, default: 1024, &:to_i))
+
+  parser.on('-s', '--server-ip IP', 'Server ip address.',
+            &set_value.call(:server_ip))
+
+  parser.on('-o', '--server-port PORT', 'Server port number.',
+            &set_value.call(:server_port, &:to_i))
+
+  keep_alive_help = <<~HELP.gsub("\n", ' ')
+    Keep alive sleep duration. Every SECONDS
+    client will send an empty request to the
+    server in order to keep UDP hole open.
+  HELP
+  parser.on('-k', '--keep-alive SECONDS', keep_alive_help,
+            &set_value.call(:keep_alive_sleep_duration, default: 10, &:to_i))
+
+  parser.on('-h', '--help', 'Print help information.') do
+    puts parser
+    exit
+  end
+end
+
+opt_parser.parse ARGV
+client = P2PChat::Client.new(**args)
+client.run

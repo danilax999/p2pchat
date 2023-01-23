@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'p2pchat/server'
+require 'p2pchat/util'
+require 'optparse'
+
+args = {}
+opt_parser = OptionParser.new do |parser|
+  set_value = P2PChat::Util.set_value args
+
+  parser.banner = 'Usage: p2pchat-server [options]'
+
+  parser.on('-p', '--port PORT', 'Server listening port number.',
+            &set_value.call(:port, default: 3000, &:to_i))
+
+  parser.on('-l', '--message-len NUMBER', 'UDP incoming message maximum length.',
+            &set_value.call(:message_len, default: 1024, &:to_i))
+
+  parser.on('-h', '--help', 'Print help information.') do
+    puts parser
+    exit
+  end
+end
+
+opt_parser.parse ARGV
+
+P2PChat::Server.new(**args).listen
