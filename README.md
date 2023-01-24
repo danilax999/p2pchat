@@ -37,6 +37,11 @@ If other peers are under the same NAT, you will be connected to them directly.
 
 See `--help` for `p2pchat` and `p2pchat-server`.
 
+## References
+
+- [UDP hole punching](https://en.wikipedia.org/wiki/UDP_hole_punching)
+- [Peer-to-Peer Communication Across Network Address Translators](https://bford.info/pub/net/p2pnat/)
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
