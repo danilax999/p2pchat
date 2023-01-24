@@ -31,7 +31,7 @@ p2phat-server -p SERVER_PORT
 p2pchat -s SERVER_IP -o SERVER_PORT -p CLIENT_PORT
 ```
 
-If other peers are under the same NAT, you will be connected to them directly.
+If other peers are under the same [NAT](https://en.wikipedia.org/wiki/Network_address_translation), you will be connected to them directly.
 
 ## Documentation
 
