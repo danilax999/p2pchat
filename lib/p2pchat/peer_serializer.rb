@@ -16,11 +16,11 @@ module P2PChat
          .split(' ')
          .map { _1.split ':' }
          .flatten(1)
-         .then do |private_ip, private_port, public_ip, public_port|
+         .then do |private_ip, private_port, public_ip, _public_port|
         Peer.new private_ip:,
-                 private_port:,
+                 private_port: private_port.to_i,
                  public_ip:,
-                 public_port:
+                 public_port: private_port.to_i
       end
     end
   end

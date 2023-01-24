@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'p2pchat/client'
+require 'p2pchat/cli_client'
 require 'p2pchat/util'
 require 'optparse'
 
@@ -23,8 +23,14 @@ opt_parser = OptionParser.new do |parser|
   parser.on('-o', '--server-port PORT', 'Server port number.',
             &set_value.call(:server_port, &:to_i))
 
+  parser.on('-f', '--flags NUMBER', 'UDP request flags.',
+            &set_value.call(:flags, default: 0, &:to_i))
+
+  parser.on('-m', '--prompt-symbol STRING', 'Symbol used in prompt. Default is `> `',
+            &set_value.call(:prompt_symbol, default: '> '))
+
   keep_alive_help = <<~HELP.gsub("\n", ' ')
-    Keep alive sleep duration. Every SECONDS
+    Keep-alive sleep duration. Every SECONDS
     client will send an empty request to the
     server in order to keep UDP hole open.
   HELP
@@ -38,5 +44,10 @@ opt_parser = OptionParser.new do |parser|
 end
 
 opt_parser.parse ARGV
-client = P2PChat::Client.new(**args)
-client.run
+
+begin
+  client = P2PChat::CLIClient.new(**args)
+  client.start
+rescue Interrupt
+  client.stop
+end

@@ -1,34 +1,41 @@
-# P2pchat
+# P2PChat
 
-TODO: Delete this and the text below, and describe your gem
+P2P chat ruby implementation using UDP hole punching method.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/p2pchat`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Dependencies
+
+- ruby-3.1+
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+```bash
+git clone https://github.com/danilax999/p2pchat
+cd p2pchat
+gem build
+gem install p2pchat*.gem
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+### Running a server
 
-## Development
+```bash
+p2phat-server -p SERVER_PORT
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+> Note: make sure SERVER_PORT is open for a UDP connection.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### Running a client
 
-## Contributing
+```bash
+p2pchat -s SERVER_IP -o SERVER_PORT -p CLIENT_PORT
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/p2pchat.
+If other peers are under the same NAT, you will be connected to them directly.
+
+## Documentation
+
+See `--help` for `p2pchat` and `p2pchat-server`.
 
 ## License
 

@@ -16,5 +16,7 @@ module P2PChat
             .find(&:ipv4_private?)
             &.ip_address
     end
+
+    def self.addr(ip, port) = "#{ip}:#{port}"
   end
 end
