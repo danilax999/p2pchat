@@ -20,9 +20,8 @@ module P2PChat
       @message_len = message_len
 
       @socket = UDPSocket.new
-      @ip_address = Util.private_ipv4_address
       @port = port
-      @socket.bind @ip_address, @port
+      @socket.bind '0.0.0.0', @port
 
       @listener = Listener.new(socket: @socket, message_len:)
       @listener.on RequestType::CONNECT, &method(:on_connect)
@@ -31,7 +30,7 @@ module P2PChat
     end
 
     def start
-      @logger.info "Server listening on #{@ip_addr}:#{@port}"
+      @logger.info "Server listening on 127.0.0.1:#{@port}"
       @listener.start
     end
 

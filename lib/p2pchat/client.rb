@@ -33,7 +33,7 @@ module P2PChat
       @socket = UDPSocket.new
       @ip_address = Util.private_ipv4_address
       @port = port
-      @socket.bind @ip_address, @port
+      @socket.bind '0.0.0.0', @port
 
       @listener = Listener.new(socket: @socket, message_len:)
       @listener.on RequestType::CONNECT, &method(:on_connect)
