@@ -1,4 +1,4 @@
-module P2pchat
+module P2PChat
   VERSION: String
   # See the writing guide of rbs: https://github.com/ruby/rbs#guides
 end
