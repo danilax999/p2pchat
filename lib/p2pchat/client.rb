@@ -60,6 +60,7 @@ module P2PChat
     def start
       connect
       @listener.start
+      stop
     end
 
     def stop

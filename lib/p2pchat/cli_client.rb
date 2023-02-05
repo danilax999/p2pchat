@@ -40,6 +40,7 @@ module P2PChat
         Thread.new { loop { send_line } }
       ]
       @threads.each(&:join)
+      stop
     end
 
     def stop
